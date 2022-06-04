@@ -1,6 +1,7 @@
 package com.example.recyclerview;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,7 +74,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(context, "Hello World!", Toast.LENGTH_SHORT).show();
+            int position = this.getAbsoluteAdapterPosition();
+            ModelClass modelClass = obj.get(position);
+
+            //Toast.makeText(context, "Name : " + modelClass.getText1() + " Phone : " + modelClass.getText3(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(context, contact_desc.class);
+            intent.putExtra("name", modelClass.getText1());
+            intent.putExtra("phone", modelClass.getText3());
+            intent.putExtra("img",String.valueOf(modelClass.getImageView1()));
+            context.startActivity(intent);
         }
     }
 }
